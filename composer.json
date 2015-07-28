@@ -1,0 +1,22 @@
+{
+    "name": "The Wild West FrameWork",
+    "description": "Quick as a Whip PHP Framework",
+    "type": "MVC Webapp Framework",
+    "version": "0.1",
+    "homepage": "http://github.com/davestj/wildwest",
+    "time": "2015-01-12 11:00:00",
+    "require": {
+        "smarty/smarty": "^3.1@dev",
+        "twig/twig": "^2.0@dev",
+        "zend/gdata": "dev-master",
+        "codeception/codeception": "^2.1@dev"
+    },
+    "license": "Internal",
+    "authors": [
+        {
+            "name": "David St. John",
+            "email": "davestj@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta"
+}

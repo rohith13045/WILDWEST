@@ -1,0 +1,16 @@
+.DS_Store
+plugins/
+logs/
+*templates_c
+dbase_admin
+memcadmin
+docs
+*tools*
+*.lock
+*cache*
+*.komodoproject
+*.idea
+vendor/
+config.base.php
+bin/composer
+.vagrant
