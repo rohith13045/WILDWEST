@@ -30,7 +30,7 @@ define('WW_DB', '$$dbpass'); \n\
 define('CACHE_PREFIX', '_WLDWST_'); \n\
 define('FIELD_PREFIX', '_WWfield_'); \n\
 define('TABLE_PREFIX', '_WWtable_'); \n\
-define('__LOG_DIRECTORY__',  dirname( __FILE__ ) . '/../logs/'); \n" > config/config.core.php
+define('__LOG_DIRECTORY__',  dirname( __FILE__ ) . '/../logs/'); \n" > config/config.base.php
 
 
 webview:
