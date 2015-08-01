@@ -142,76 +142,15 @@ class MasterDb extends PDO {
     }
 
     /**
-     * TO-DO: Implement db ping
+     *@return string
      */
     public function pingDb(){
-        return;
+        return(self::query_single("SELECT 1"));
     }
 
 
 }
 
-
-/**
- * Class legacyDb old school
- */
-class legacyDb {
-    /**
-     * @var string
-     */
-    private $host      = WW_DB_HOST;
-    /**
-     * @var string
-     */
-    private $user      = WW_DB_LOGIN;
-    /**
-     * @var string
-     */
-    private $pass      = WW_DB_PASS;
-    /**
-     * @var string
-     */
-    private $dbname    = WW_DB_DB;
-    /**
-     * @var
-     */
-    private $connection;
-    /**
-     * @var
-     */
-    private $error;
-
-    public $sql = "";
-
-    public function __construct(){
-
-        //default utf8 character set
-        mysql_set_charset('utf8', self::legacy_connect());
-    }
-
-
-    /**
-     * @return resource
-     */
-    protected function legacy_connect() {
-        $this->connection = mysql_connect($this->host, $this->user, $this->pass)
-        or die ("\nCould not connect to MySQL server\n");
-        mysql_select_db($this->dbname,$this->connection)
-        or die ("\nCould not select the indicated database\n");
-        return ($this->connection);
-    }
-
-    /**
-     * @param $sql
-     * @return resource|string
-     */
-    public function legacy_query($sql){
-        $this->sql = mysql_query(mysql_real_escape_string($sql,self::legacy_connect()));
-        return ($this->sql);
-    }
-
-
-}
 
 
 
