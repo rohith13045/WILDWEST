@@ -3,39 +3,47 @@
  * The Wild West FrameWork
  * @copyright 2015
  *
- *
+ */
+
+ /**
+ * Define environment, are we local vagrant, development or production?
+ */
+define('WILD_WEST_ENV', 'DEVELOPMENT');
+define('APP_NAME','WILDWEST');
+
+ /**
  * Trait DBConfig
  */
 trait DBConfig{
 
-   /* DB_HOST is inherited from cake factory config.php */
+
     /**
      * @return string
      */
     public function thehost(){
-        return WW_HOST;
+        return "127.0.0.1";
     }
-    /* DB_LOG is inherited from cake factory config.php */
+ 
     /**
      * @return string
      */
     public function theuser(){
-        return WW_LOGIN;
+        return "root";
     }
-    /* DB_PSDD is inherited from cake factory config.php */
+   
 
     /**
      * @return string
      */
     public function thepass(){
-        return WW_PASS;
+        return "CHANGEME";
     }
-    /* DB_DB is inherited from cake factory config.php */
+
     /**
      * @return string
      */
     public function thedbname(){
-        return WW_DB;
+        return "wildwest";
     }
 
     /**
@@ -47,21 +55,25 @@ trait DBConfig{
             case "mysql":
                 $dsn = "mysql:host=".self::thehost().";dbname=".self::thedbname().";port=3306";
                 return ($dsn);
-            break;
+                break;
             case "pgsql":
                 $dsn = "pgsql:host=".self::thehost().";dbname=".self::thedbname().";port=5432";
                 return ($dsn);
-            break;
+                break;
             case "mssql":
                 $dsn = "dblib:host=".self::thehost().";dbname=".self::thedbname().";port=1433";
                 return ($dsn);
-            break;
+                break;
             case "mongodb":
                 $dsn = "NOT";
                 return($dsn);
             default:
                 return 3306;
         }
+    }
+
+    public function SessionConnect(){
+        return(mysqli_connect(self::thehost(),self::theuser(),self::thepass(),self::thedbname(),3306));
     }
 
 
@@ -71,11 +83,19 @@ trait DBConfig{
  * Trait GeneralConfig
  */
 trait GeneralConfig{
+    
+        /**
+     * @return string
+     */
+    public function log_path(){
+        return(dirname( __FILE__ ) . '/../logs/');
+    }
+    
     /**
      * @return string
      */
     public function get_env(){
-        return(ENV);
+        return(WILD_WEST_ENV);
     }
 
     /**
@@ -166,21 +186,21 @@ trait MemcacheConfig{
      * @return string
      */
     public function memcache_prefix(){
-        return(CACHE_PREFIX);
+        return(APP_NAME);
     }
 
     /**
      * @return string
      */
     public function field_prefix(){
-    return(FIELD_PREFIX);
+    return(APP_NAME._FIELD_);
     }
 
     /**
      * @return string
      */
     public function table_prefix(){
-        return(TABLE_PREFIX);
+        return(APP_NAME._TABLE_);
     }
 
 
