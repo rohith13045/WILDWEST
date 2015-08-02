@@ -54,7 +54,7 @@ class __index  extends SmartyView implements PageStruct {
 public function __construct($viewp,$cache,$debug){
     parent::__construct($viewp, $cache, $debug);
 
-    $this->dbObj                = new IndexModel();
+    $this->dbObj                = new IndexModel(self::thedsn("mysql"),self::theuser(),self::thepass());
     $this->logobj       	= new Logger();
     $this->viewpath             = $viewp;
     $this->cache                = $cache;
