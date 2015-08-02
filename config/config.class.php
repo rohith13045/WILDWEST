@@ -5,7 +5,6 @@
  *
  *
  *
-
  * Class TheWildWest
  */
 class TheWildWest{
@@ -36,7 +35,7 @@ class TheWildWest{
                /* manual error reporting override */
         .     error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING)
         .     ini_set("memory_limit", "512M")
-        .     session_start()
+        .     self::startSession()
         );
 
     }
