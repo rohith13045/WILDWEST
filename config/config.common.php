@@ -1,6 +1,5 @@
 <?php
 /**
-/**
  * The Wild West FrameWork
  * @copyright 2015
  *
@@ -9,7 +8,7 @@
  * Common configuration directives for Wild West
  *
  */
-require_once( dirname( __FILE__ ) .'/config.base.php');
+
 require_once( dirname( __FILE__ ) .'/config.traits.php');
 require_once( dirname( __FILE__ ) .'/config.class.php');
 /**
