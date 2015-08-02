@@ -11,8 +11,19 @@ class IndexModel extends MasterDb{
     use GeneralConfig;
 
 
-    public function __construct(){
-        parent::__construct(self::thedsn("mysql"), self::theuser(),self::thepass());
+    private $error;
+
+    public function __construct($dsn, $user = "", $passwd = ""){
+        $options = array(
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        );
+
+        try {
+            parent::__construct($dsn, $user, $passwd, $options);
+        } catch (PDOException $e) {
+            $this->error = $e->getMessage();
+        }
     }
 
     /**  EXAMPLES
