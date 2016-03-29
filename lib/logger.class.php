@@ -1,7 +1,7 @@
 <?php
 /**
  * The Wild West FrameWork
- * @copyright 2015
+ * @copyright 20015
  *
  * Generic logging class for tracking debug info and execution time.
  *
@@ -9,6 +9,8 @@
  *
  */
 class Logger{
+
+    use GeneralConfig;
 
     /**
      * @var string
@@ -19,11 +21,6 @@ class Logger{
      * @var string
      */
     public $logfilename     = "";
-
-    /**
-     * @var string
-     */
-    public $logdirectory    = __LOG_DIRECTORY__;
 
     /**
      * @var string
@@ -76,7 +73,7 @@ class Logger{
     public function logit($msg){
         
         $this->msgstring        = "$msg";
-        $this->res              = opendir($this->logdirectory);
+        $this->res              = opendir(self::log_path());
         $this->logfile          = "debug_". date("Y-m-d") . ".log";
         $this->timestamp        = date("Y-m-d H:i:s A");
         $this->debug_tracer     = debug_backtrace();
@@ -99,7 +96,7 @@ class Logger{
             . $this->method . "\n"
             . "logged message: " . $this->msgstring  . "\n\n";
 
-        $this->logfilename = "$this->logdirectory" . "$this->logfile";
+        $this->logfilename = self::log_path() . "$this->logfile";
         try {
             $this->file_handle = fopen($this->logfilename, 'a');
             fwrite($this->file_handle, $this->stringData);
@@ -109,10 +106,10 @@ class Logger{
         }
 }
 
-/**
- * @param $debugtrace
- * @return string
- */
+    /**
+     * @param $debugtrace
+     * @return string
+     */
     public function _debugtrace($debugtrace){
         
         $i = 0;
@@ -120,21 +117,26 @@ class Logger{
         while (isset($debugtrace[$i]) && $i <= 10) {
             
             if (array_key_exists('file', $debugtrace[$i])) {
-                $file_name = ''.$debugtrace[$i].'["file"]';
+                $file_name = "File: ". $debugtrace[$i]['file'];
+                $func      = $debugtrace[$i]["function"];
+                $args      = $debugtrace[$i]["args"][0];
             } else {
-                $file_name = '(no file)';
+                $file_name = "";
             }
 
             if (array_key_exists('line', $debugtrace[$i])) {
-                $file_line = "({$debugtrace[$i]['line']})";
+                $file_line = $debugtrace[$i]['line'];
+                $func      = $debugtrace[$i]["function"];
+                $args      = $debugtrace[$i]["args"][0];
             } else {
                 $file_line = "";
             }
-            $this->method .= ''.$file_name.''.$file_line.': '.$debugtrace[$i]["function"].' ()'; PHP_EOL;
+            $this->method .= "$file_name($file_line):$func(\"$args\"); \n";
             $i++;
-        }
 
+        }
         return ($this->method);
+
     }
 
 
